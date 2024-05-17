@@ -13,15 +13,18 @@ function App() {
     // let currentJournalEntries = [...journalEntries];
     // currentJournalEntries.push({title, author, content, date});
     // setJournalEntries(currentJournalEntries)
-    setJournalEntries([...journalEntries, {title, author, content, date}])
+    setJournalEntries([...journalEntries, {title, author, content, date}]);
+    setStoredEntries([...journalEntries, {title, author, content, date}]);
   }
+
+  
 
   useEffect(() => {
     setJournalEntries(storedEntries);
 
-    return (() => {
-      setStoredEntries(journalEntries);
-    });
+    // return (() => {
+    //   setStoredEntries(journalEntries);
+    // });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -32,8 +35,8 @@ function App() {
       <EntryForm addEntry={addEntryToJournal} />
 
 
-      {journalEntries.map(entry => {
-        return <EntryParent entryData={entry} addEntry={addEntryToJournal} />
+      {journalEntries.map((entry, index) => {
+        return <EntryParent key={index} entryData={entry} addEntry={addEntryToJournal} />
       })}
     </div>
   );
