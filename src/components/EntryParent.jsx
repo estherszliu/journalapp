@@ -1,3 +1,7 @@
+import { useState } from "react";
+import Entry from "./Entry";
+import EntryForm from "./EntryForm";
+
 
 export default function EntryParent(props){
 
