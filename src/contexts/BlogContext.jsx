@@ -1,4 +1,6 @@
-import { useContext, createContext, useState } from "react";
+
+import { useContext, createContext, useState, useEffect } from "react";
+import { useLocalStorage } from "react-use";
 
 
 let defaultJournalData = [
@@ -28,14 +30,27 @@ export function useJournalDispatch(){
 }
 
 
-export function BlogProvider(props){
+export function BlogProvider(children){
+
+    let [journalEntries, setJournalEntries] = useState([]);
+    let [storedEntries, setStoredEntries] = useLocalStorage("journalEntries", []);
 
     let [exampleState, setExampleState] = useState("Hello from global level!");
 
+
+    useEffect(() => {
+        setJournalEntries(storedEntries);
+
+        // return (() => {
+        //   setStoredEntries(journalEntries);
+        // });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
-        <JournalDataContext.Provider value={exampleState}>
-            <JournalDispatchContext.Provider value={setExampleState}>
-                {props.children}
+        <JournalDataContext.Provider value={journalEntries}>
+            <JournalDispatchContext.Provider value={setJournalEntries}>
+                {children}
             </JournalDispatchContext.Provider>
         </JournalDataContext.Provider>
     )
