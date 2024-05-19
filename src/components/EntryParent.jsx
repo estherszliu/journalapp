@@ -12,11 +12,12 @@ export default function EntryParent(props){
     let journalEntries = useJournalData();
 
     useEffect(() => {
-        let foundEntry = journalEntries.find(entry => entry.id === props.id);
-
-        setJournalEntry(foundEntry)
-
-    },[]);
+        let foundEntry = journalEntries.find(entry => entry.id === parseInt(props.id));
+        if (foundEntry) {
+            setJournalEntry(foundEntry);
+            setEditMode(false);
+        }
+    },[journalEntries]);
 
 
 	return(

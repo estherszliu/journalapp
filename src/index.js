@@ -19,9 +19,9 @@ root.render(
             {/* Shows All posts as read-only */}
             <Route index element={<HomePage />} />
             {/* Show individual post with edit toggle */}
-            {/* <Route path='/view/:id' element={<EntryPage/>} /> */}
+            <Route path='/view/:id' element={<EntryViewPage/>} />
             {/* Show a form to make a new post */}
-            {/* <Route path='/create' element={<NewEntryPage />} /> */}
+            <Route path='/create' element={<NewEntryPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
